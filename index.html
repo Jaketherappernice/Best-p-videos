@@ -1,57 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>homepage</title>
-<style>
-  body {
-    background-color: black;
-    color: white;
-    padding: 0px;
-  }
-  .orange{
-    color: #e08417;
-    font-size: 50px;
-  }
-  .search-textarea {
-    background-color: black;
-    color: white;
-    width: 200px;
-    height: 40px;
-    border: 2px solid orange;
-    border-radius:9px;
-    position: absolute;
-    top: 50px;
-    right: 10px;
-  }
-.search-button {
-  background: linear-gradient(to right, orange, yellow, white);
-  color: black; /* Adjust for contrast */
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  height: 40px;
-  position: absolute;
-  top: 55px;
-  right: 10px;
-}
-  .hr {
-    background-color: black;
-    color: orange;
-    border: 1px solid orange;
-  }
-  
-</style>
+  <meta charset="UTF-8" />
+  <title>Best Videos</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      font-family: sans-serif;
+      background-image: linear-gradient(to bottom right, #8B4000, #FFD700);
+      background-blend-mode: overlay;
+      color: white;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    header {
+      padding: 30px 20px 10px;
+    }
+
+    .orange {
+      color: #e08417;
+      font-size: 50px;
+    }
+
+    hr {
+      border: none;
+      height: 2px;
+      background: linear-gradient(to right, orange, yellow);
+      margin: 30px 0;
+    }
+
+    .video-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+
+    .video-card {
+      width: 200px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 2px solid orange;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px #ffa5003b;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: scale(1.05);
+    }
+
+    .video-thumb {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-bottom: 1px solid orange;
+    }
+
+    .video-title {
+      margin: 10px;
+      font-size: 16px;
+      color: #ffd700;
+      text-align: center;
+    }
+
+    /* Search Button System */
+    .search-wrapper {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .search-toggle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(to right, orange, yellow);
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: black;
+      font-weight: bold;
+      box-shadow: 0 0 8px yellow;
+      transition: transform 0.3s ease;
+    }
+
+    .search-area {
+      width: 0;
+      max-width: 70vw;
+      height: 40px;
+      opacity: 0;
+      padding: 0;
+      margin-right: 10px;
+      border: 2px solid orange;
+      border-radius: 5px;
+      background-color: black;
+      color: white;
+      transition: width 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+      overflow: hidden;
+      font-size: 16px;
+    }
+
+    .search-area.show {
+      width: 200px;
+      opacity: 1;
+      padding: 5px 10px;
+    }
+
+    .search-area::placeholder {
+      color: #ccc;
+    }
+  </style>
 </head>
 <body>
-<heading>
- <h1><span class="orange">Best Porn</span><br>Videos</h1>
- <textarea class="search-textarea" placeholder="search videos here"></textarea>
- <button class="search-button">🔎</button>
- <hr class="hr">
-</heading>
-<div class="video container"></div>
+  <header>
+    <h1><span class="orange">Best</span><br>Videos</h1>
+    <hr>
+  </header>
+
+  <div class="video-container" id="videoContainer"></div>
+
+  <div class="search-wrapper">
+    <input type="text" class="search-area" placeholder="Search videos..." />
+    <button class="search-toggle">🔍</button>
+  </div>
+
+  <script>
+    let videoData = [];
+
+    const toggleBtn = document.querySelector('.search-toggle');
+    const searchInput = document.querySelector('.search-area');
+    const videoContainer = document.getElementById('videoContainer');
+
+    toggleBtn.addEventListener('click', () => {
+      searchInput.classList.add('show');
+      searchInput.focus();
+    });
+
+    searchInput.addEventListener('blur', () => {
+      setTimeout(() => {
+        if (!searchInput.value.trim()) {
+          searchInput.classList.remove('show');
+        }
+      }, 300);
+    });
+
+    searchInput.addEventListener('input', () => {
+      const keyword = searchInput.value.toLowerCase();
+      const filtered = videoData.filter(v => v.title.toLowerCase().includes(keyword));
+      renderVideos(filtered);
+    });
+
+    function renderVideos(data) {
+      videoContainer.innerHTML = '';
+      data.forEach(video => {
+        const card = document.createElement('a');
+        card.className = 'video-card';
+        card.href = `fullinfo.html?id=${video.id}`;
+        card.innerHTML = `
+          <img src="${video.thumbnail}" alt="${video.title}" class="video-thumb">
+          <h3 class="video-title">${video.title}</h3>
+        `;
+        videoContainer.appendChild(card);
+      });
+    }
+
+    fetch('data.json')
+      .then(res => res.json())
+      .then(data => {
+        videoData = data;
+        renderVideos(videoData);
+      })
+      .catch(err => {
+        console.error('Error loading video data:', err);
+      });
+  </script>
 </body>
 </html>
