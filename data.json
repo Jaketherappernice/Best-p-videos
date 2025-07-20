@@ -1,0 +1,30 @@
+[
+  {
+    "id": "vid1",
+    "title": "Exploring the Cosmos",
+    "description": "A deep dive into galaxies, black holes, and the mysteries of space.",
+    "thumbnail": "https://i.imgur.com/9RZz0vN.jpg",
+    "link": "https://www.youtube.com/watch?v=space123"
+  },
+  {
+    "id": "vid2",
+    "title": "JavaScript in 60 Seconds",
+    "description": "Learn the core JS concepts in under a minute.",
+    "thumbnail": "https://i.imgur.com/nYf9AgJ.jpg",
+    "link": "https://www.youtube.com/watch?v=js60sec"
+  },
+  {
+    "id": "vid3",
+    "title": "Firebase Rules Demystified",
+    "description": "Master Firebase security rules with real-world examples.",
+    "thumbnail": "https://i.imgur.com/MFQ9eL5.jpg",
+    "link": "https://www.youtube.com/watch?v=firebaseX"
+  },
+  {
+    "id": "vid4",
+    "title": "Mystery Box Coding Challenge",
+    "description": "Can you crack the button logic? Try this interactive puzzle.",
+    "thumbnail": "https://i.imgur.com/PWz5n5f.jpg",
+    "link": "https://www.youtube.com/watch?v=mystery456"
+  }
+]
