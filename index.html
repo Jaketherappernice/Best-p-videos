@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>homepage</title>
+<style>
+  body {
+    background-color: black;
+    color: white;
+    padding: 0px;
+  }
+  .orange{
+    color: #e08417;
+    font-size: 50px;
+  }
+  .search-textarea {
+    background-color: black;
+    color: white;
+    width: 200px;
+    height: 40px;
+    border: 2px solid orange;
+    border-radius:9px;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+  }
+.search-button {
+  background: linear-gradient(to right, orange, yellow, white);
+  color: black; /* Adjust for contrast */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  height: 40px;
+  position: absolute;
+  top: 55px;
+  right: 10px;
+}
+  .hr {
+    background-color: black;
+    color: orange;
+    border: 1px solid orange;
+  }
+  
+</style>
+</head>
+<body>
+<heading>
+ <h1><span class="orange">Best</span><br>Videos</h1>
+ <textarea class="search-textarea" placeholder="search videos here"></textarea>
+ <button class="search-button">🔎</button>
+ <hr class="hr">
+</heading>
+<div class="video container"></div>
+</body>
+</html>
