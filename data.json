@@ -27,4 +27,11 @@
     "thumbnail": "https://i.imgur.com/PWz5n5f.jpg",
     "link": "https://www.youtube.com/watch?v=mystery456"
   }
+  {
+    "id": "vid5",
+    "title": "Firebase Rules Demystified",
+    "description": "Master Firebase security rules with real-world examples.",
+    "thumbnail": "https://i.imgur.com/MFQ9eL5.jpg",
+    "link": "https://www.youtube.com/watch?v=firebaseX"
+  },
 ]
